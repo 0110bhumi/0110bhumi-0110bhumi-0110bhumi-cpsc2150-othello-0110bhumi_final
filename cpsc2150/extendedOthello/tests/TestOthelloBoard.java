@@ -11,6 +11,15 @@ import static org.junit.Assert.*;
  */
 public class TestOthelloBoard {
 
+/**
+ * Helper method to construct a new OthelloBoard.
+ * @return a new IOthelloBoard instance
+ */
+private IOthelloBoard makeBoard() {
+    return new OthelloBoard();
+}
+
+
     /**
      * Converts the given board into a string representation for easier comparison in tests.
      * 
@@ -34,7 +43,7 @@ public class TestOthelloBoard {
      */
     @Test
     public void testInitialBoardState() {
-        IOthelloBoard board = new OthelloBoard();
+        IOthelloBoard board = makeBoard();
 
         char[][] expected = new char[8][8];
         for (int r = 0; r < 8; r++) {
@@ -56,7 +65,7 @@ public class TestOthelloBoard {
      */
     @Test
     public void testWhatsAtPos_Initial_X_at_3_3() {
-        IOthelloBoard board = new OthelloBoard();
+        IOthelloBoard board = makeBoard();
         assertEquals('X', board.whatsAtPos(new BoardPosition(3, 3)));
     }
 
@@ -65,7 +74,7 @@ public class TestOthelloBoard {
      */
     @Test
     public void testWhatsAtPos_Initial_X_at_4_4() {
-        IOthelloBoard board = new OthelloBoard();
+        IOthelloBoard board = makeBoard();
         assertEquals('X', board.whatsAtPos(new BoardPosition(4, 4)));
     }
 
@@ -74,7 +83,7 @@ public class TestOthelloBoard {
      */
     @Test
     public void testWhatsAtPos_Initial_O_at_3_4() {
-        IOthelloBoard board = new OthelloBoard();
+        IOthelloBoard board = makeBoard();
         assertEquals('O', board.whatsAtPos(new BoardPosition(3, 4)));
     }
 
@@ -83,7 +92,7 @@ public class TestOthelloBoard {
      */
     @Test
     public void testWhatsAtPos_Empty_TopLeft() {
-        IOthelloBoard board = new OthelloBoard();
+        IOthelloBoard board = makeBoard();
         assertEquals(' ', board.whatsAtPos(new BoardPosition(0, 0)));
     }
 
@@ -92,7 +101,7 @@ public class TestOthelloBoard {
      */
     @Test
     public void testIsPositionValid_EmptyTrue() {
-        IOthelloBoard board = new OthelloBoard();
+        IOthelloBoard board = makeBoard();
         assertTrue(board.isPositionValid(new BoardPosition(0, 0)));
     }
 
@@ -101,7 +110,7 @@ public class TestOthelloBoard {
      */
     @Test
     public void testIsPositionValid_FilledFalse() {
-        IOthelloBoard board = new OthelloBoard();
+        IOthelloBoard board = makeBoard();
         assertFalse(board.isPositionValid(new BoardPosition(3, 3)));
     }
 
@@ -110,7 +119,7 @@ public class TestOthelloBoard {
      */
     @Test
     public void testPlaceToken_FlipsVertically() {
-        IOthelloBoard board = new OthelloBoard();
+        IOthelloBoard board = makeBoard();
         board.placeToken('X', new BoardPosition(2, 3));
 
         assertEquals('X', board.whatsAtPos(new BoardPosition(2, 3)));
@@ -122,7 +131,7 @@ public class TestOthelloBoard {
      */
     @Test
     public void testIsPlayerAtPos_ReturnsTrue() {
-        IOthelloBoard board = new OthelloBoard();
+        IOthelloBoard board = makeBoard();
         assertTrue(board.isPlayerAtPos(new BoardPosition(3, 3), 'X'));
     }
 
@@ -131,7 +140,7 @@ public class TestOthelloBoard {
      */
     @Test
     public void testIsPlayerAtPos_ReturnsFalse() {
-        IOthelloBoard board = new OthelloBoard();
+        IOthelloBoard board = makeBoard();
         assertFalse(board.isPlayerAtPos(new BoardPosition(0, 0), 'O'));
     }
 
@@ -140,7 +149,7 @@ public class TestOthelloBoard {
      */
     @Test
     public void testCheckPlayerWin_AllXTrue() {
-        IOthelloBoard board = new OthelloBoard();
+        IOthelloBoard board = makeBoard();
 
         for (int r = 0; r < 8; r++) {
             for (int c = 0; c < 8; c++) {
@@ -157,7 +166,7 @@ public class TestOthelloBoard {
      */
     @Test
     public void testGetScore_Initial() {
-        IOthelloBoard board = new OthelloBoard();
+        IOthelloBoard board = makeBoard();
         int[] scores = board.getScore();
         assertEquals("Score for X should be 2", 2, scores[0]);
         assertEquals("Score for O should be 2", 2, scores[1]);
@@ -168,7 +177,7 @@ public class TestOthelloBoard {
      */
     @Test
     public void testToString_ContainsScoreSummary() {
-        IOthelloBoard board = new OthelloBoard();
+        IOthelloBoard board = makeBoard();
         String output = board.toString();
         assertTrue("toString should contain score for X", output.contains("X -"));
         assertTrue("toString should contain score for O", output.contains("O -"));
